@@ -12,8 +12,9 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def db_teardown(exception):
-    """declare a method to handle @app.teardown_appcontext that calls storage.close()"""
+def db_teardown(self):
+    """declare a method to handle @app.teardown_appcontext
+    that calls storage.close()"""
     storage.close()
 
 
