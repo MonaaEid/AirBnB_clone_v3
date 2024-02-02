@@ -27,11 +27,3 @@ def stats():
     for key, value in classes.items():
         stats[key] = storage.count(value)
     return jsonify(stats)
-# def stats():
-#     """retrieves the number of each objects by type"""
-#     classes = [Amenity, City, Place, Review, State, User]
-#     stats = {}
-#     for cls in classes:
-#         stats[cls.__tablename__] = storage.count(cls)
-
-#     return stats
