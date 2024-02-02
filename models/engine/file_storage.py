@@ -9,7 +9,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
-classes = {"Amenity": Amenity,"City": City,
+classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
 
@@ -90,10 +90,10 @@ class FileStorage:
     def get(self, cls, id):
         """A method to retrieve one object"""
         if cls and id:
-            key = "{}.{}".format(cls,id)
+            key = "{}.{}".format(cls, id)
             if key in self.__objects:
                 return self.__objects[key]
-            return None        
+            return None
 
     def count(self, cls=None):
         """method to count the number of objects in storage"""
@@ -101,4 +101,3 @@ class FileStorage:
             return len(self.all(cls))
         else:
             return len(self.all())
-                       

@@ -5,14 +5,16 @@ from flask import jsonify
 import json
 from models import storage
 
+
 classes = {
     "amenities": "Amenity",
-    "cities":'City',
+    "cities": 'City',
     "places": 'Place',
     "reviews": 'Review',
     "states": 'State',
     "users": 'User'
 }
+
 
 @app_views.route("/status", strict_slashes=False)
 def status():

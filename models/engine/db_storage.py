@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 import sqlalchemy as db
 
-classes =  {"Amenity": Amenity,"City": City,
+classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
 
@@ -60,7 +60,6 @@ class DBStorage:
                     new_dict[key] = obj
         return (new_dict)
 
-
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.__session.add(obj)
@@ -96,7 +95,7 @@ class DBStorage:
     def get(self, cls, id):
         """A method to retrieve one object or None from the current database"""
         return self.__session.query(cls).filter(cls.id == id).first()
-    
+
     def count(self, cls=None):
         """method to count the number of objects in storage"""
         return len(self.all(cls))
