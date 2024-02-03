@@ -6,6 +6,7 @@ from flask import redirect, render_template, request
 from api.v1.views import app_views
 from models import storage
 import os
+from flask import jsonify
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -16,6 +17,11 @@ def db_teardown(self):
     """declare a method to handle @app.teardown_appcontext
     that calls storage.close()"""
     storage.close()
+
+@app.errorhandler(404)
+def not_found(self):
+    """ handle 404 error(not found)"""
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
