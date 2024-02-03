@@ -84,7 +84,7 @@ class DBStorage:
 
     def close(self):
         """hello"""
-        self.__session.close()
+        self.__session.remove()
         # Base.metadata.create_all(self.__engine)
         # session_factory = sessionmaker(
         #     bind=self.__engine, expire_on_commit=False)
