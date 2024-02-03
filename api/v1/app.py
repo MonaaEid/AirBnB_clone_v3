@@ -18,6 +18,7 @@ def db_teardown(self):
     that calls storage.close()"""
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(self):
     """ handle 404 error(not found)"""
