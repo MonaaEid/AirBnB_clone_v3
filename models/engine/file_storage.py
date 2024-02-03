@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+import models
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -89,11 +90,20 @@ class FileStorage:
 
     def get(self, cls, id):
         """A method to retrieve one object"""
-        if cls and id:
-            key = "{}.{}".format(cls, id)
-            if key in self.__objects:
-                return self.__objects[key]
+        # if cls and id:
+        #     key = "{}.{}".format(cls, id)
+        #     if key in self.__objects:
+        #         return self.__objects[key]
+        #     return None
+        if cls not in classes.values():
             return None
+
+        all_cls = models.storage.all(cls)
+        for value in all_cls.values():
+            if (value.id == id):
+                return value
+
+        return None
 
     def count(self, cls=None):
         """method to count the number of objects in storage"""
