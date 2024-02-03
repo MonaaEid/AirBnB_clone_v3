@@ -11,7 +11,7 @@ from models.state import State
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def states():
     """retrives the list of all state objects"""
-    states = storage.all("State")
+    states = storage.all(State)
     state_list = []
     for state in states.values():
         state_list.append(state.to_dict())
@@ -22,7 +22,7 @@ def states():
                  methods=['GET'], strict_slashes=False)
 def state(state_id):
     """retrives a state object"""
-    state = storage.get("state", state_id)
+    state = storage.get(State, state_id)
     if state is None:
         abort(404)
     return jsonify(state.to_dict())
@@ -32,12 +32,14 @@ def state(state_id):
                  methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
     """deletes a state object"""
+    if state_id is None:
+        abort(404)
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
     state.delete()
     storage.save()
-    return jsonify({}), 200
+    return jsonify({})
 
 
 @app_views.route("/states/", methods=['POST'], strict_slashes=False)
