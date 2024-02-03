@@ -4,7 +4,7 @@ default RESTFul API actions"""
 
 from api.v1.views import app_views
 from models import storage
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from models.state import State
 
 
@@ -24,7 +24,7 @@ def state(state_id):
     """retrives a state object"""
     state = storage.get("state", state_id)
     if state is None:
-        return jsonify({"error": "Not found"}), 404
+        abort(404)
     return jsonify(state.to_dict())
 
 
@@ -34,7 +34,7 @@ def delete_state(state_id):
     """deletes a state object"""
     state = storage.get("state", state_id)
     if state is None:
-        return jsonify({"error": "Not found"}), 404
+        abort(404)
     storage.delete(state)
     storage.save()
     return jsomify({}), 200
@@ -60,7 +60,7 @@ def update_state(state_id):
     data = request.get_json()
     state = storage.get("State", state_id)
     if state is None:
-        return jsonify({"error": "Not found"}), 404
+        abort(404)
     if not data:
         return jsonify({"error": "Not a JSON"}), 400
     for key, value in data.items():
