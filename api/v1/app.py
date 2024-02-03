@@ -1,12 +1,9 @@
 #!/usr/bin/python3
 """This module defines a Flask Blueprint."""
-from flask import Flask
-import json
-from flask import redirect, render_template, request
+from flask import Flask, jsonify, Blueprint
 from api.v1.views import app_views
 from models import storage
 import os
-from flask import jsonify
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
