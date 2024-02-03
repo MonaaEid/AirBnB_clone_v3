@@ -11,11 +11,11 @@ from models.state import State
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def states():
     """retrives the list of all state objects"""
-    states = storage.all(State)
     state_list = []
+    states = storage.all(State)
     for state in states.values():
         state_list.append(state.to_dict())
-        return jsonify(state_list)
+    return jsonify(state_list)
 
 
 @app_views.route('/states/<string:state_id>',
@@ -39,8 +39,7 @@ def delete_state(state_id):
         abort(404)
     state.delete()
     storage.save()
-    return jsonify({})
-
+    return jsonify({}), 200
 
 @app_views.route("/states/", methods=['POST'], strict_slashes=False)
 def create_state():
