@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a Flask Blueprint."""
+"""This module start Flask application"""
 from flask import Flask, jsonify, Blueprint
 from api.v1.views import app_views
 from models import storage
