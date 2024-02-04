@@ -35,7 +35,6 @@ def get_place(place_id):
 
 @app_views.route('/places/<string:place_id>', methods=['DELETE'],
                     strict_slashes=False)
-
 def delete_place(place_id):
     """deletes a place object"""
     place = storage.get(Place, place_id)
@@ -71,7 +70,6 @@ def create_place(city_id):
 
 @app_views.route('/places/<string:place_id>', methods=['PUT'],
                     strict_slashes=False)
-
 def update_place(place_id):
     """updates a place object"""
     place = storage.get(Place, place_id)
@@ -83,6 +81,5 @@ def update_place(place_id):
     for key, value in data.items():
         if key not in ['id', 'user_id', 'city_id', 'created_at', 'updated_at']:
             setattr(place, key, value)
-    place.save()
+    storage.save()
     return jsonify(place.to_dict()), 200
-
