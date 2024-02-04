@@ -52,7 +52,7 @@ def delete_city(city_id):
 def create_city(state_id):
     """creates a new city object"""
     state = storage.get(State, state_id)
-    if state_id is None:
+    if state is None:
         abort(404)
     date = request.get_json()
     if not date:
