@@ -61,7 +61,7 @@ def create_amenity():
                  methods=['PUT'], strict_slashes=False)
 def update_amenity(amenity_id):
     """update an amenity object"""
-    amenity = storage.get(amenity, amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
     data = request.get_json()
