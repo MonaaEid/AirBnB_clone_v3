@@ -9,7 +9,7 @@ from models.user import User
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
-def user():
+def get_users():
     """retrives the list of all user objects"""
     user_list = []
     users = storage.all(User)
@@ -20,7 +20,7 @@ def user():
 
 @app_views.route('/users/<string:user_id>',
                  methods=['GET'], strict_slashes=False)
-def user_id(user_id):
+def get_user(user_id):
     """retrives a user object"""
     user = storage.get(User, user_id)
     if user is None:
@@ -32,8 +32,6 @@ def user_id(user_id):
                  methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
     """deletes a user object"""
-    if user_id is None:
-        abort(404)
     user = storage.get(User, user_id)
     if user is None:
         abort(404)
