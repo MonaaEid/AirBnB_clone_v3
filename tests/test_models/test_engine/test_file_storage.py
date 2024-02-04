@@ -21,7 +21,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
+        except BaseException:
             pass
 
     def test_obj_list_empty(self):
@@ -37,7 +37,7 @@ class test_fileStorage(unittest.TestCase):
         new = BaseModel()
         _id = new.to_dict()['id']
         temp = None  # Initialize temp with a default value
-        if type(_id) == str:
+        if isinstance(_id, str):
             temp = 'BaseModel' + '.' + _id
         self.assertEqual(temp, 'BaseModel' + '.' + _id)
 
@@ -123,5 +123,3 @@ class test_fileStorage(unittest.TestCase):
             self.assertEqual(new, obj)
         else:
             self.assertEqual(obj, None)
-
-    
