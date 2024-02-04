@@ -107,3 +107,9 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+    def test_get(self):
+        """ Test get method """
+        new = BaseModel()
+        _id = new.to_dict()['id']
+        self.assertEqual(new, storage.get('BaseModel', _id))
