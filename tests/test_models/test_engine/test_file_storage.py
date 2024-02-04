@@ -113,3 +113,11 @@ class test_fileStorage(unittest.TestCase):
         new = BaseModel()
         _id = new.to_dict()['id']
         self.assertEqual(new, storage.get('BaseModel', _id))
+    
+    def test_count(self):
+        """ Test count method """
+        count = storage.count()
+        new = BaseModel()
+        self.assertEqual(count + 1, storage.count())
+        new.delete()
+        self.assertEqual(count, storage.count())

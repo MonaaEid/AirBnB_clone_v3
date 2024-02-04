@@ -94,3 +94,13 @@ class TestFileStorage(unittest.TestCase):
         state.save()
         state_id = state.id
         self.assertEqual(state, models.storage.get(State, state_id))
+    
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    def test_count(self):
+        """Test that count returns the number of objects in storage"""
+        count = models.storage.count()
+        state = State(name="California")
+        state.save()
+        self.assertEqual(count + 1, models.storage.count())
+        state.delete()
+        self.assertEqual(count, models.storage.count())
