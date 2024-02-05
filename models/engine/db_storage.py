@@ -17,10 +17,12 @@ classes = {"Amenity": Amenity, "City": City,
 
 
 class DBStorage:
+    """This class manages storage of hbnb models in a database"""
     __engine = None
     __session = None
 
     def __init__(self):
+        """Constructor for DBStorage class"""
         HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
         HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
         HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
