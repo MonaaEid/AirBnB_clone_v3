@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """view for User objects that handles all
 default RESTFul API actions"""
 from api.v1.views import app_views
