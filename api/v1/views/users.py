@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""view for User objects that handles all
-default RESTFul API actions"""
+"""view for User objects that handles all default RESTFul API actions"""
 from models import storage
 from models.user import User
 from api.v1.views import app_views
@@ -68,6 +67,3 @@ def update_user(user_id):
             setattr(user, key, value)
     storage.save()
     return jsonify(user.to_dict()), 200
-
-if __name__ == "__main__":
-    pass
