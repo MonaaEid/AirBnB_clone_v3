@@ -10,6 +10,8 @@ from models.place import Place
 from models.amenity import Amenity
 
 
+storage_t = getenv("HBNB_TYPE_STORAGE")
+
 if getenv("HBNB_TYPE_STORAGE") == 'db':
     from models.engine.db_storage import DBStorage
     storage = DBStorage()
