@@ -5,9 +5,9 @@ default RESTFul API actions"""
 from api.v1.views import app_views
 from models import storage
 from flask import request, jsonify, abort
+from models.user import User
 from models.place import Place
 from models.city import City
-from models.user import User
 
 
 @app_views.route('/cities/<string:city_id>/places', methods=['GET'],
