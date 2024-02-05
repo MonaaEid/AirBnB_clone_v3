@@ -127,13 +127,11 @@ class TestFileStorage(unittest.TestCase):
 
     def test_get(self):
         """Test that get returns specific object"""
-        def test_get(self):
-            """Test that get returns specific object"""
-            new_state = State(name="LA")
-            new_state.save()
-            new_user = User(email="monty@monty.com", password="password")
-            new_user.save()
-            self.assertIs(new_state, models.storage.get("State", new_state.id))
-            self.assertIs(None, models.storage.get("WTF", "HSKDJF"))
-            self.assertIs(None, models.storage.get("State", "Luxor"))
-            self.assertIs(new_user, models.storage.get("User", new_user.id))
+        new_state = State(name="LA")
+        new_state.save()
+        new_user = User(email="monty@monty.com", password="password")
+        new_user.save()
+        self.assertIs(new_state, models.storage.get("State", new_state.id))
+        self.assertIs(None, models.storage.get("WTF", "HSKDJF"))
+        self.assertIs(None, models.storage.get("State", "Luxor"))
+        self.assertIs(new_user, models.storage.get("User", new_user.id))
