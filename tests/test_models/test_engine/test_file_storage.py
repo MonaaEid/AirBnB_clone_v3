@@ -135,3 +135,16 @@ class TestFileStorage(unittest.TestCase):
         self.assertIs(None, models.storage.get("WTF", "HSKDJF"))
         self.assertIs(None, models.storage.get("State", "Luxor"))
         self.assertIs(new_user, models.storage.get("User", new_user.id))
+
+    def test_count(self):
+        """Test that count returns the number of objects in storage"""
+        count = models.storage.count()
+        new_state = State(name="LA")
+        new_state.save()
+        self.assertEqual(models.storage.count(), count + 1)
+        new_user = User(email="monty@mon.com", password="password")
+        new_user.save()
+        self.assertEqual(models.storage.count(), count + 2)
+        new_user.delete()
+        new_state.delete()
+        self.assertEqual(models.storage.count(), count)
