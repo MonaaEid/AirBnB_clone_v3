@@ -4,10 +4,10 @@ from api.v1.views import app_views
 from flask import Flask, jsonify, Blueprint
 from flask_cors import CORS
 from models import storage
-import os
+from os import getenv
 
 app = Flask(__name__)
-app.register_blueprint(app_views, url_prefix='/api/v1')
+app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
@@ -24,6 +24,10 @@ def not_found(self):
 
 
 if __name__ == "__main__":
-    app.run(host=os.getenv('HBNB_API_HOST', '0.0.0.0'),
-            port=int(os.getenv('HBNB_API_PORT', '5000')),
-            threaded=True)
+    # app.run(host=os.getenv('HBNB_API_HOST', '0.0.0.0'),
+    #         port=int(os.getenv('HBNB_API_PORT', '5000')),
+    #         threaded=True)
+
+    host = getenv("HBNB_API_HOST") if getenv("HBNB_API_HOST") else "0.0.0.0"
+    port = getenv("HBNB_API_PORT") if getenv("HBNB_API_PORT") else 5000
+    app.run(host=host, port=port, threaded=True)
