@@ -12,14 +12,8 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 import sqlalchemy as db
 
-classes = {
-    'Amenity': Amenity,
-    'City': City,
-    'Place': Place,
-    'State': State,
-    'Review': Review,
-    'User': User
-}
+classes = {"Amenity": Amenity, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
 
 
 class DBStorage:
@@ -100,22 +94,12 @@ class DBStorage:
         # Session.remove()
 
     def get(self, cls, id):
-        """Retrieve an object"""
-        if cls is not None and type(cls) is str and id is not None and\
-           type(id) is str and cls in classes:
-            cls = classes[cls]
-            result = self.__session.query(cls).filter(cls.id == id).first()
-            return result
-        else:
+        """A method to retrieve one object or None from the current database"""
+        if cls not in classes.values():
             return None
+        return self.__session.query(cls).filter(cls.id == id).first()
+
 
     def count(self, cls=None):
-        """Count number of objects in storage"""
-        total = 0
-        if type(cls) == str and cls in classes:
-            cls = classes[cls]
-            total = self.__session.query(cls).count()
-        elif cls is None:
-            for cls in classes.values():
-                total += self.__session.query(cls).count()
-        return total
+        """method to count the number of objects in storage"""
+        return len(self.all(cls))
