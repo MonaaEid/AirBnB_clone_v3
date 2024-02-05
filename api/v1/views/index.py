@@ -16,12 +16,12 @@ def status():
 def stats():
     """retrieves the number of each objects by type"""
     classes = {
-    "amenities": "Amenity",
-    "cities": 'City',
-    "places": 'Place',
-    "reviews": 'Review',
-    "states": 'State',
-    "users": 'User'
+        "amenities": "Amenity",
+        "cities": 'City',
+        "places": 'Place',
+        "reviews": 'Review',
+        "states": 'State',
+        "users": 'User'
     }
     stats = {}
     for key, value in classes.items():
