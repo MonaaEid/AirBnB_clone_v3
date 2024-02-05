@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """This module start Flask application"""
-from flask import Flask, jsonify, Blueprint
 from api.v1.views import app_views
+from flask import Flask, jsonify, Blueprint
+from flask_cors import CORS
 from models import storage
 import os
-from flask_cors import CORS
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
