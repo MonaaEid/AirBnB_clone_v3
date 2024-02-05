@@ -94,4 +94,8 @@ class TestFileStorage(unittest.TestCase):
         state = State(name="California")
         state.save()
         state_id = state.id
-        self.assertEqual(state, models.storage.get(State, state_id))
+        obj = models.storage.get(State, state_id)
+        if obj:
+            self.assertEqual(state, obj)
+        else:
+            self.fail("Object not found in storage")

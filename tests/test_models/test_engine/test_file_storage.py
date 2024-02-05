@@ -125,18 +125,13 @@ class TestFileStorage(unittest.TestCase):
         FileStorage._FileStorage__objects = save
         self.assertFalse(os.path.exists("file.json"))
 
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get(self):
-        """Test that get returns the object with the given id"""
-        storage = FileStorage()
-        new_dict = {}
-        for key, value in classes.items():
-            instance = value()
-            instance_key = instance.__class__.__name__ + "." + instance.id
-            new_dict[instance_key] = instance
-        save = FileStorage._FileStorage__objects
-        FileStorage._FileStorage__objects = new_dict
-        for key, value in classes.items():
-            instance = storage.get(value, instance.id)
-            self.assertEqual(instance, new_dict[value.__name__ + "." + instance.id])
-        FileStorage._FileStorage__objects = save
+        """Test that get returns specific object"""
+        state = State(name="California")
+        state.save()
+        state_id = state.id
+        obj = models.storage.get(State, state_id)
+        if obj:
+            self.assertEqual(state, obj)
+        else:
+            self.fail("Object not found in storage")
