@@ -91,11 +91,11 @@ class TestFileStorage(unittest.TestCase):
         
     def test_get(self):
         """Test that get returns specific object"""
-        state = State(name="California")
-        state.save()
-        state_id = state.id
-        obj = models.storage.get(State, state_id)
-        if obj:
-            self.assertEqual(state, obj)
-        else:
-            self.fail("Object not found in storage")
+        new_state = State(name="LA")
+        new_state.save()
+        new_user = User(email="monty@monty.com", password="password")
+        new_user.save()
+        self.assertIs(new_state, models.storage.get("State", new_state.id))
+        self.assertIs(None, models.storage.get("WTF", "HSKDJF"))
+        self.assertIs(None, models.storage.get("State", "Luxor"))
+        self.assertIs(new_user, models.storage.get("User", new_user.id))
