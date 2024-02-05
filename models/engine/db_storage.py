@@ -60,7 +60,6 @@ class DBStorage:
                     new_dict[key] = obj
         return (new_dict)
 
-
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.__session.add(obj)
@@ -98,7 +97,6 @@ class DBStorage:
         if cls not in classes.values():
             return None
         return self.__session.query(cls).filter(cls.id == id).first()
-
 
     def count(self, cls=None):
         """method to count the number of objects in storage"""
