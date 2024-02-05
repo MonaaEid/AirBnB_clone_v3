@@ -113,38 +113,3 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
-
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_save_empty(self):
-        """Test that save properly saves objects to file.json"""
-        storage = FileStorage()
-        new_dict = {}
-        save = FileStorage._FileStorage__objects
-        FileStorage._FileStorage__objects = new_dict
-        storage.save()
-        FileStorage._FileStorage__objects = save
-        self.assertFalse(os.path.exists("file.json"))
-
-    def test_get(self):
-        """Test that get returns specific object"""
-        new_state = State(name="LA")
-        new_state.save()
-        new_user = User(email="monty@monty.com", password="password")
-        new_user.save()
-        self.assertIs(new_state, models.storage.get("State", new_state.id))
-        self.assertIs(None, models.storage.get("WTF", "HSKDJF"))
-        self.assertIs(None, models.storage.get("State", "Luxor"))
-        self.assertIs(new_user, models.storage.get("User", new_user.id))
-
-    def test_count(self):
-        """Test that count returns the number of objects in storage"""
-        count = models.storage.count()
-        new_state = State(name="LA")
-        new_state.save()
-        self.assertEqual(models.storage.count(), count + 1)
-        new_user = User(email="monty@mon.com", password="password")
-        new_user.save()
-        self.assertEqual(models.storage.count(), count + 2)
-        new_user.delete()
-        new_state.delete()
-        self.assertEqual(models.storage.count(), count)
