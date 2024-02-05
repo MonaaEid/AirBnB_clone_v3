@@ -10,7 +10,7 @@ from models.place import Place
 
 
 @app_views.route('/places/<string:place_id>/reviews', methods=['GET'],
-                    strict_slashes=False)
+                 strict_slashes=False)
 def get_reviews(place_id):
     """retrives the list of all review objects"""
     place = storage.get(Place, place_id)
@@ -23,7 +23,7 @@ def get_reviews(place_id):
 
 
 @app_views.route('/reviews/<string:review_id>', methods=['GET'],
-                    strict_slashes=False)
+                 strict_slashes=False)
 def get_review(review_id):
     """retrives a review object"""
     review = storage.get(Review, review_id)
@@ -33,7 +33,7 @@ def get_review(review_id):
 
 
 @app_views.route('/reviews/<string:review_id>', methods=['DELETE'],
-                    strict_slashes=False)
+                 strict_slashes=False)
 def delete_review(review_id):
     """deletes a review object"""
     review = storage.get(Review, review_id)
@@ -45,7 +45,7 @@ def delete_review(review_id):
 
 
 @app_views.route('/places/<string:place_id>/reviews', methods=['POST'],
-                    strict_slashes=False)
+                 strict_slashes=False)
 def create_review(place_id):
     """creates a new review object"""
     place = storage.get(Place, place_id)
@@ -68,7 +68,7 @@ def create_review(place_id):
 
 
 @app_views.route('/reviews/<string:review_id>', methods=['PUT'],
-                    strict_slashes=False)
+                 strict_slashes=False)
 def update_review(review_id):
     """updates a review object"""
     data = request.get_json()
@@ -78,7 +78,12 @@ def update_review(review_id):
     if not data:
         return jsonify({"error": "Not a JSON"}), 400
     for key, value in data.items():
-        if key not in ['id', 'user_id', 'place_id', 'created_at', 'updated_at']:
+        if key not in [
+            'id',
+            'user_id',
+            'place_id',
+            'created_at',
+                'updated_at']:
             setattr(review, key, value)
     storage.save()
     return jsonify(review.to_dict())
