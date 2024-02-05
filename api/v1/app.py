@@ -12,14 +12,14 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
-def db_teardown(code):
+def db_teardown():
     """declare a method to handle @app.teardown_appcontext
     that calls storage.close()"""
     storage.close()
 
 
 @app.errorhandler(404)
-def not_found(self):
+def not_found():
     """ handle 404 error(not found)"""
     return jsonify({"error": "Not found"}), 404
 
