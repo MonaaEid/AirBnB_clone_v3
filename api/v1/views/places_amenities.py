@@ -10,7 +10,7 @@ from models.amenity import Amenity
 
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'],
-                    strict_slashes=False)
+                 strict_slashes=False)
 def get_amenities(place_id):
     """Retrieves the list of all Amenity objects of a Place"""
     place = storage.get(Place, place_id)
@@ -21,7 +21,7 @@ def get_amenities(place_id):
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
-                    methods=['POST'], strict_slashes=False)
+                 methods=['POST'], strict_slashes=False)
 def post_amenity(place_id, amenity_id):
     """Creates a Amenity"""
     place = storage.get(Place, place_id)
